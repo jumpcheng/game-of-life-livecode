@@ -21,7 +21,11 @@ class Board
       end
     end
 
-
+    @board.each do |row|
+      row.each do |cell|
+        cell.next
+      end
+    end
   end
 
   # (-1, -1) (-1, 0) (-1, +1)
