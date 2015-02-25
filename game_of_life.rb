@@ -1,16 +1,19 @@
 class Board
   def initialize(board_str)
-    board_str.split(',').each do |row_str|
-      row_str.split('').each do |cell_str|
-        print cell_str
+    @board = board_str.split(',').map do |row_str|
+      row_str.split('').map do |cell_str|
+        Cell.new(cell_str)
       end
-      puts 
     end
   end
 end
 
 class Cell
+  attr_reader :alive
 
+  def initialize(cell_str)
+    @alive = (cell_str == 'X')
+  end
 end
 
 board = Board.new(".XX.,....,....,XXXX")
