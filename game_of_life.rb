@@ -6,6 +6,12 @@ class Board
       end
     end
   end
+
+  def to_s
+    @board.map do |row|
+      row.map(&:to_s).join('')
+    end.join("\n")
+  end
 end
 
 class Cell
@@ -14,8 +20,13 @@ class Cell
   def initialize(cell_str)
     @alive = (cell_str == 'X')
   end
+
+  def to_s
+    @alive ? 'X' : '.'
+  end
 end
 
 board = Board.new(".XX.,....,....,XXXX")
+puts board
 # board.next
 # puts board
