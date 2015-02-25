@@ -10,6 +10,17 @@ class Board
   end
 
   def next
+    @board.each_with_index do |row, y|
+      row.each_with_index do |cell, x|
+        neighbors = neighbors_alive(y, x)
+        if cell.alive
+          cell.alive_next = [2,3].include?(neighbors)
+        else
+          cell.alive_next = (neighbors == 3)
+        end
+      end
+    end
+
 
   end
 
@@ -20,7 +31,7 @@ class Board
     num_alive = 0
     (-1..1).each do |dy|
       (-1..1).each do |dx|
-        num_alive += (alive_at?(y - dx, x - dx) ? 1 : 0) unless (y == 0 && x == 0)
+        num_alive += (alive_at?(y - dy, x - dx) ? 1 : 0) unless (y == 0 && x == 0)
       end
     end
     num_alive
@@ -39,11 +50,14 @@ class Board
 end
 
 class Cell
-  attr_reader :alive
+  attr_accessor :alive, :alive_next
 
   def initialize(cell_str)
     @alive = (cell_str == 'X')
+    @alive_next = nil
   end
+
+  
 
   def to_s
     @alive ? 'X' : '.'
