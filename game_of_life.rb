@@ -5,6 +5,17 @@ class Board
         Cell.new(cell_str)
       end
     end
+    @height = @board.length
+    @width = @board.first.length
+  end
+
+  def next
+
+  end
+
+  def alive_at?(y, x)
+    return false if y < 0 || x < 0 || y >= @height || x >= @width
+    @board[y][x].alive
   end
 
   def to_s
