@@ -61,14 +61,39 @@ class Cell
     @alive_next = nil
   end
 
-  
+  def next
+    @alive = @alive_next
+    @alive_next = nil
+  end
 
   def to_s
     @alive ? 'X' : '.'
   end
 end
 
-board = Board.new(".XX.,....,....,XXXX")
-puts board
+class Game
+  def initialize(board_str)
+    @board = Board.new(board_str)
+  end
+
+  def clear_screen
+   print "\e[H\e[2J"
+  end
+
+  def run
+    loop do
+      @board.next
+      clear_screen
+      puts @board
+      sleep 0.5
+    end
+  end
+end
+
+game = Game.new("......,.XXX..,......,......")
+game.run
+# board.next
+# puts
+# puts board
 # board.next
 # puts board
