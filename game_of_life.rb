@@ -35,7 +35,7 @@ class Board
     num_alive = 0
     (-1..1).each do |dy|
       (-1..1).each do |dx|
-        num_alive += (alive_at?(y - dy, x - dx) ? 1 : 0) unless (y == 0 && x == 0)
+        num_alive += (alive_at?(y - dy, x - dx) ? 1 : 0) unless (dy == 0 && dx == 0)
       end
     end
     num_alive
