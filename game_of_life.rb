@@ -13,6 +13,19 @@ class Board
 
   end
 
+  # (-1, -1) (-1, 0) (-1, +1)
+  # (0, -1)   (0, 0) (+1, 0)
+  # (+1, -1)  (+1, 0) (+1, +1)
+  def neighbors_alive(y, x)
+    num_alive = 0
+    (-1..1).each do |dy|
+      (-1..1).each do |dx|
+        num_alive += (alive_at?(y - dx, x - dx) ? 1 : 0) unless (y == 0 && x == 0)
+      end
+    end
+    num_alive
+  end
+
   def alive_at?(y, x)
     return false if y < 0 || x < 0 || y >= @height || x >= @width
     @board[y][x].alive
